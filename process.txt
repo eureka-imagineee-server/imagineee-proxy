@@ -1,3 +1,0 @@
-- First get a uuid and a key
-- use the proxy with your uuid certificate and key
-- if over 100 uses of a certificate it is purged

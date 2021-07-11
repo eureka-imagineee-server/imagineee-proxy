@@ -1,50 +1,16 @@
-const express = require('express');
-const request = require('request');
-const { v4, stringify, v5 } = require('uuid');
-const url = require('url');
+import { Application } from "https://deno.land/x/abc@v1.3.3/mod.ts";
 
-const app = express();
+const app = new Application();
 
-var curUUID = {}
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
-app.get('/v1/proxy/get/:url', (req, res) => {
-	if (req.query.uuid == curUUID[req.query.key].uuid) {
-		if (curUUID[req.params.key].uses <= 100) {
-			request(
-				{ url: 'https://' + req.parms.url },
-				(error, response, body) => {
-					if (error || response.statusCode !== 200) {
-						return res.status(500).json({ type: 'error', message: err.message });
-					}
-					res.json(JSON.parse(body));
-				}
-			)
-			curUUID[req.params.key].uses++
-		}
-		if (curCertificate[req.params.key].uses > 100) {
-			delete curUUID[req.params.key]
-		}
-	}
+app.get("/get", async (c) => {
+	let r
+	let result = await fetch(c.queryParams.url)
+	//if (c.queryParams.type == 'text') {
+		result = await result.text()
+	//}
+	r = result
+	return JSON.stringify({data: r});
 })
-app.get('/v1/keys/get', (req, res) => {
-	let certs = {uuid: v4(), key: Math.floor(Math.random()*99999)*10000}
-	res.json(certs)
-	curUUID[certs.key] = {uuid: v4(), key: Math.floor(Math.random()*99999)*10000}
-	curUUID[certs.key].uses = 0
-});
+.start({ port: 8080 || process.env.PORT });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
-
-function fullUrl(req) {
-	return url.format({
-		protocol: req.protocol,
-		host: req.get('host'),
-		pathname: req.originalUrl
-	});
-}
+console.log(`running at http://localhost:${8080 || process.env.PORT}/`);
