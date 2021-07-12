@@ -5,9 +5,15 @@ const app = new Application();
 app.get("/get", async (c) => {
 	let r
 	let result = await fetch(c.queryParams.url)
-	//if (c.queryParams.type == 'text') {
+	if (c.queryParams.type == 'text') {
 		result = await result.text()
-	//}
+	} else if (c.queryParams.type == 'blob') {
+		result = await result.blob()
+	} else if (c.queryParams.type == 'json') {
+		result = await result.json()
+	} else {
+		result = await result.text()
+	}
 	r = result
 	return JSON.stringify({data: r});
 })
