@@ -17,6 +17,6 @@ app.get("/get", async (c) => {
 	r = result
 	return JSON.stringify({data: r});
 })
-.start({ port: 8080 || process.env.PORT });
+.start({ port: process.env.PORT || 8080 });
 
 console.log(`running at http://localhost:${8080 || process.env.PORT}/`);
