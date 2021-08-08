@@ -1,0 +1,20 @@
+{
+  "name": "imagineee-proxy",
+  "version": "1.0.0",
+  "description": "imagineee's proxy",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eureka-imagineee-server/imagineee-proxy.git"
+  },
+  "author": "imagineee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eureka-imagineee-server/imagineee-proxy/issues"
+  },
+  "homepage": "https://github.com/eureka-imagineee-server/imagineee-proxy#readme"
+}
