@@ -16,7 +16,7 @@ app.get('/v1/proxy/get', (req, res) => {
   } else if (req.query.type == "json") {
     fetch(req.query.url, {method: "GET"})
     .then(res => res.json())
-    .then(json => res.json(json));
+    .then(json => res.json({json: json}));
   } else if (req.query.type == "blob") {
     fetch(req.query.url, {method: "GET"})
     .then(res => res.blob())
