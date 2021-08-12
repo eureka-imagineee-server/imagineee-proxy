@@ -3,7 +3,12 @@ const fetch = require('node-fetch');
 
 const app = express();
 
-app.get('/v1/proxy/get', (req, res) =>{
+app.get('/', (req, res) => {
+  res.send("welcome to imagineee proxy")
+})
+
+app.get('/v1/proxy/get', (req, res) => {
+  console.log("request...")
   if (req.query.type == "text") {
     fetch(req.query.url, {method: "GET"})
     .then(res => res.text())
@@ -11,7 +16,7 @@ app.get('/v1/proxy/get', (req, res) =>{
   } else if (req.query.type == "json") {
     fetch(req.query.url, {method: "GET"})
     .then(res => res.json())
-    .then(json => res.json({json: json}));
+    .then(json => res.json(json));
   } else if (req.query.type == "blob") {
     fetch(req.query.url, {method: "GET"})
     .then(res => res.blob())
@@ -29,4 +34,3 @@ app.get('/v1/proxy/get', (req, res) =>{
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`listening on ${PORT}`))
-
