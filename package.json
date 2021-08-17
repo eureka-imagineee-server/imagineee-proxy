@@ -19,6 +19,7 @@
   "homepage": "https://github.com/eureka-imagineee-server/imagineee-proxy#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "cors": "^2.8.5",
     "node-fetch": "^2.6.1"
   }
 }
